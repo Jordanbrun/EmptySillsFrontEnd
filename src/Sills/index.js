@@ -23,10 +23,22 @@ class Sills extends Component{
     getUser = async () => {
         try{
             const userId = localStorage.getItem('sessionUserId');
-            const user = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/${userId}`, {
-                credentials: 'include',
-                method: "GET"
-            })
+            let parsedUser = null
+
+            // const user = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/${userId}`, {
+            //     credentials: 'include',
+            //     method: "GET"
+            // })
+
+           //const parsedUser = await user.json()
+            if (userId) {
+                parsedUser = JSON.parse(localStorage.getItem('currentUser'));
+           } 
+
+            if (!parsedUser) {
+                this.props.history.push('/')
+            }
+
 
         } catch(err){
             this.props.history.push('/')
@@ -47,34 +59,34 @@ class Sills extends Component{
             console.log(parsedPlants.data, "2")
             console.log(this.state.plants, "3")
             console.log(parsedPlants.data.length)
-            for(let i=0; i<parsedPlants.data.length; i++){
-                console.log(parsedPlants.data[i],"4")
-                console.log(parsedPlants.data[i].user.id, "5")
-                if(parsedPlants.data[i].user.id.toString() === localStorage.getItem('sessionUserId').toString()){
-                    console.log("6")
-                    await this.setState({
-                        plantData: [...this.state.plantData, parsedPlants.data[i]]
-                    })
-                        console.log(this.state.plantData, '7')
-                        console.log(this.state.plantData[i],"8")
-                        console.log(this.state.plantData[i].plant_id,"9")
-                        //console.log(this.state.parsedPlants.data[i], "8")
-                    const quedPlants = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/plants/sill/`, {
-                        method: "POST",
-                        body: JSON.stringify(this.state.plantData[i].plant_id),
-                        credentials: 'include',
-                        headers: {
-                        'Content-Type': 'application/json'}
-                     })
-                    const allPlantData = await quedPlants.json()
-                    console.log(quedPlants)
-                    await this.setState({
-                         plants: [...this.state.plants, allPlantData]
-                    })
-                    console.log(this.state.plants)
-                    console.log(this.state.plantData)
+                for(let i=0; i<parsedPlants.data.length; i++){
+                    console.log(parsedPlants.data[i],"4")
+                    console.log(parsedPlants.data[i].user.id, "5")
+                    if(parsedPlants.data[i].user.id.toString() === localStorage.getItem('sessionUserId').toString()){
+                        console.log("6")
+                        await this.setState({
+                            plantData: [...this.state.plantData, parsedPlants.data[i]]
+                        })
+                            console.log(this.state.plantData, '7')
+                            console.log(this.state.plantData[i],"8")
+                            console.log(this.state.plantData[i].plant_id,"9")
+                            //console.log(this.state.parsedPlants.data[i], "8")
+                        const quedPlants = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/plants/sill/`, {
+                            method: "POST",
+                            body: JSON.stringify(this.state.plantData[i].plant_id),
+                            credentials: 'include',
+                            headers: {
+                            'Content-Type': 'application/json'}
+                         })
+                        const allPlantData = await quedPlants.json()
+                        console.log(quedPlants)
+                        await this.setState({
+                             plants: [...this.state.plants, allPlantData]
+                        })
+                        console.log(this.state.plants)
+                        console.log(this.state.plantData)
+                    }
                 }
-            }
 
 
 

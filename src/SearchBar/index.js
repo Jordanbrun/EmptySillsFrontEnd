@@ -18,30 +18,28 @@ class Search extends Component{
             }
         }
     }
-    componentDidMount(){
-        this.getUser();
-    }
-    getUser = async () => {
-        try{
-            // console.log("get user function");
-            const userId = localStorage.getItem('sessionUserId');
-            // console.log(userId);
-            const user = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/${userId}`, {
-                credentials: 'include',
-                method: "GET"
-            })
+    // componentDidMount(){
+    //     this.getUser();
+    // }
+    // getUser = async () => {
+    //     try{
+    //         const userId = localStorage.getItem('sessionUserId');
+    //         const user = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/${userId}`, {
+    //             credentials: 'include',
+    //             method: "GET"
+    //         })
 
-            const parsedUser = await user.json()
-             console.log("currentUser:", parsedUser);
-            // this.setState({
-            //     currentUser: parsedUser
-            // })
+    //         const parsedUser = await user.json()
+    //          console.log("currentUser:", parsedUser);
+    //         this.setState({
+    //             currentUser: parsedUser
+    //         })
 
-        } catch(err){
-            console.log(err);
-            this.props.history.push('/')
-        }
-    }
+    //     } catch(err){
+    //         console.log(err);
+    //         this.props.history.push('/')
+    //     }
+    // }
     searchButton = async () => {
         try {
             this.setState({
