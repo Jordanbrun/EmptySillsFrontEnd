@@ -8,7 +8,7 @@ class Search extends Component{
     constructor(){
         super();
         this.state = {
-            currentUser: [],
+            currentUser: JSON.parse(localStorage.getItem('currentUser')) || {},
             loader: false,
             plants: [],
             userInput:"",
@@ -33,9 +33,9 @@ class Search extends Component{
 
             const parsedUser = await user.json()
              console.log("currentUser:", parsedUser);
-            this.setState({
-                currentUser: parsedUser
-            })
+            // this.setState({
+            //     currentUser: parsedUser
+            // })
 
         } catch(err){
             console.log(err);
