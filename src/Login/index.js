@@ -33,6 +33,7 @@ class Login extends Component{
         if(parsedResponse.status.code === 200){
 			console.log(parsedResponse.data.id)
 			localStorage.setItem('sessionUserId', parsedResponse.data.id)
+			localStorage.setItem('currentUser', JSON.stringify(parsedResponse.data))
 			this.props.history.push('/home')
         } else{
             this.setState({

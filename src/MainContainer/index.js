@@ -8,7 +8,7 @@ class MainContainer extends Component{
     constructor(){
         super();
         this.state = {
-            currentUser: []
+            currentUser: null
         }
     }
     componentDidMount(){
@@ -18,13 +18,20 @@ class MainContainer extends Component{
         try{
             const userId = localStorage.getItem('sessionUserId');
 
-            const user = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/${userId}`, {
-                credentials: 'include',
-                method: "GET"
-            })
+            // const user = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/${userId}`, {
+            //     credentials: 'include',
+            //     method: "GET"
+            // })
 
-            const parsedUser = await user.json()
-             console.log("currentUser:", parsedUser);
+           //const parsedUser = await user.json()
+           if (userId) {
+                const parsedUser = JSON.parse(localStorage.getItem('currentUser'));
+           } 
+           console.log(parsedUser)
+
+           if (!parsedUser) {
+            this.props.history.push('/')
+           }
 
              
             this.setState({
