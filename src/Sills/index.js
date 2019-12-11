@@ -69,8 +69,8 @@ class Sills extends Component{
                         plantData: [...this.state.plantData, parsedPlants.data[i]]
                     })
                         console.log(this.state.plantData, '7')
-                        console.log(this.state.plantData[i],"8")
-                        console.log(this.state.plantData[i].plant_id,"9")
+                        // console.log(this.state.plantData[i],"8")
+                        // console.log(this.state.plantData[i].plant_id,"9")
                         //console.log(this.state.parsedPlants.data[i], "8")
                     const quedPlants = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/plants/sill/`, {
                         method: "POST",
