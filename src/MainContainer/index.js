@@ -17,6 +17,7 @@ class MainContainer extends Component{
     getUser = async () => {
         try{
             const userId = localStorage.getItem('sessionUserId');
+            let parsedUser = null
 
             // const user = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/${userId}`, {
             //     credentials: 'include',
@@ -25,7 +26,7 @@ class MainContainer extends Component{
 
            //const parsedUser = await user.json()
            if (userId) {
-                const parsedUser = JSON.parse(localStorage.getItem('currentUser'));
+                parsedUser = JSON.parse(localStorage.getItem('currentUser'));
            } 
            console.log(parsedUser)
 
