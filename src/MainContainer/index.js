@@ -8,13 +8,13 @@ class MainContainer extends Component{
     constructor(){
         super();
         this.state = {
-            currentUser: null
+            currentUser: JSON.parse(localStorage.getItem('currentUser')) || {}
         }
     }
     componentDidMount(){
         this.getUser();
     }
-    getUser = async () => {
+    getUser = () => {
         try{
             const userId = localStorage.getItem('sessionUserId');
             let parsedUser = null
@@ -25,24 +25,22 @@ class MainContainer extends Component{
             // })
 
            //const parsedUser = await user.json()
-           if (userId) {
+            if (userId) {
                 parsedUser = JSON.parse(localStorage.getItem('currentUser'));
            } 
-           console.log(parsedUser)
 
-           if (!parsedUser) {
-            this.props.history.push('/')
-           }
+            if (!parsedUser) {
+                this.props.history.push('/')
+            }
 
-             
-            this.setState({
-                currentUser: parsedUser
-            })
 
+        console.log(userId)
+        console.log(this.state.currentUser)
         } catch(err){
             console.log(err);
             this.props.history.push('/')
         }
+        console.log(this.state.currentUser.display_name)
     }
     render(){
         return(
@@ -50,13 +48,12 @@ class MainContainer extends Component{
                 <NavBar/>
                 <Container text>
                 <Image src="https://i.ibb.co/7XcZ3YC/Logo-Makr-2-Y74t-W.png" size='small' centered='true'></Image>
-                 <Segment inverted>Welcome back to Empty Sills, {this.state.currentUser.display_name}! Be sure to stop by your "Sill" to check the status of your plants.</Segment>
+                <Segment inverted>Welcome back to Empty Sills, {this.state.currentUser.display_name}! Be sure to stop by your "Sill" to check the status of your plants.</Segment>
                 </Container>
                 
             </React.Fragment>
         )
     }
 }
-
 
 export default MainContainer;

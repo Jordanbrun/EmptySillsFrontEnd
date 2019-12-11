@@ -16,6 +16,7 @@ class NavBar extends Component{
     }
     handleLogout = async (e) => {
         localStorage.setItem('sessionUserId', null);
+        localStorage.setItem('currentUser', null);
     }
     render(){
         return(
